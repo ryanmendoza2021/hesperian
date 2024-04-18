@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:hesperidas/post/BodyRouteView.dart';
 import 'package:hesperidas/post/posts/PostType2.dart';
+import 'package:hesperidas/post/posts/PostType3.dart';
+import 'package:hesperidas/post/posts/PostType4.dart';
+import 'package:hesperidas/post/posts/PostType5.dart';
 import 'posts/PostType1.dart';
+
+final Map<String, Function> menuRoutes = {
+  const PostType1().getRoute(): (() => const PostType1()),
+  const PostType2().getRoute(): (() => const PostType2()),
+  const PostType3().getRoute(): (() => const PostType3()),
+  const PostType4().getRoute(): (() => const PostType4()),
+  const PostType5().getRoute(): (() => const PostType5()),
+};
 
 class RoutesBodyService {
 
-  static final Map<String, Function> menuRoutes = {
-    const PostType1().getRoute(): (() => const PostType1()),
-    const PostType2().getRoute(): (() => const PostType2())
-  };
+  static int numMenuRoutes = menuRoutes.length;
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     var route = settings.name.toString();
@@ -50,11 +58,11 @@ class RoutesBodyService {
   }
 
   static Iterable<String> getMenuRoutesArray() {
-    return menuRoutes.keys.take(2);
+    return menuRoutes.keys.take(numMenuRoutes);
   }
 
   static Map<String, Function> getMenuRoutes() {
-    return Map.fromEntries(menuRoutes.entries.take(2));
+    return Map.fromEntries(menuRoutes.entries.take(numMenuRoutes));
   }
 
   static Iterable<String> getBodyRoutesArray() {
@@ -67,10 +75,6 @@ class RoutesBodyService {
 
   static String getIndexRoute() {
     return menuRoutes.keys.first;
-  }
-
-  static init() {
-
   }
 
 }

@@ -3,7 +3,6 @@ import 'FavoritesService.dart';
 
 class ManagerServices {
   static initServices () {
-    RoutesBodyService.init();
     FavoritesService.initService();
   }
 }

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:hesperidas/components/ToggleFavorites.dart';
 import 'package:hesperidas/post/BodyRouteView.dart';
 
-class PostType1 extends StatelessWidget implements BodyRouteView{
-  const PostType1({super.key});
+class PostType3 extends StatelessWidget implements BodyRouteView{
+  const PostType3({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +25,13 @@ class PostType1 extends StatelessWidget implements BodyRouteView{
   @override
   String getRoute() {
     // TODO: implement getRoute
-    return '/post1';
+    return '/post3';
   }
 
   @override
   String getTitle() {
     // TODO: implement getTitle
-    return 'Publicación: Pantalla de Inicio';
+    return 'Publicación: Post 3';
   }
 
   @override
