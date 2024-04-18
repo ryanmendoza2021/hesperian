@@ -8,8 +8,10 @@ class NavigationRouteService {
 
   static void navigateTo(String routeName, BuildContext context) {
     Navigator.pop(context);
-    navigatorKey.currentState!.pushNamed(routeName);
-    currentRoute = routeName;
+    if (routeName != currentRoute) {
+      navigatorKey.currentState!.pushNamed(routeName);
+      currentRoute = routeName;
+    }
   }
 
   static String getCurrentRoute() {

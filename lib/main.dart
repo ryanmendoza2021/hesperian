@@ -1,24 +1,25 @@
 
 import 'package:flutter/material.dart';
 import 'package:hesperidas/components/InputSearch.dart';
-import 'package:hesperidas/post/RouteGenerator.dart';
+import 'package:hesperidas/post/BodyRouteView.dart';
+import 'package:hesperidas/post/RoutesBodyService.dart';
+import 'package:hesperidas/utils/ManagerServices.dart';
 import 'package:hesperidas/utils/NavigationRouteService.dart';
 import 'components/BottonNavigationBar.dart';
-import 'post/RouteGenerator.dart' as routeUtils;
+import 'post/RoutesBodyService.dart' as routeUtils;
 
 void main () {
   runApp(MyApp());
 }
 class MyApp extends StatelessWidget {
   final NavigationRouteService _navigationService = NavigationRouteService();
-
   MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    ManagerServices.initServices();
     return MaterialApp(
       title: 'Hesperian - Rutas Dinámicas',
-      initialRoute: '/', // Especifica la ruta inicial aquí
       home: MainScaffold(navigationService: _navigationService),
     );
   }
@@ -41,21 +42,22 @@ class MainScaffold extends StatelessWidget {
       ),
       drawer: Drawer(
         child: ListView.builder(
-          itemCount: routeUtils.routesApp.length,
+          itemCount: RoutesBodyService.getMenuRoutesArray().length,
           itemBuilder: (context, index) {
-            String ruta = routeUtils.routesApp.keys.elementAt(index);
-            var value = routeUtils.routesApp[ruta]!;
+            String ruta = RoutesBodyService.getMenuRoutesArray().elementAt(index);
+            BodyRouteView value = RoutesBodyService.getDataOf(ruta);
             return ListTile(
               leading: const Icon(Icons.person),
-              title: Text(value['nombre']),
+              title: Text(value.getTitle()),
               onTap: () => NavigationRouteService.navigateTo(ruta, context),
             );
           },
         ),
       ),
       body: Navigator(
+        initialRoute:RoutesBodyService.getIndexRoute(),
         key: NavigationRouteService.navigatorKey, //
-        onGenerateRoute: RouteGenerator.generateRoute,
+        onGenerateRoute: RoutesBodyService.generateRoute,
       ),
       bottomNavigationBar: const ButtonNavigationBar());
 

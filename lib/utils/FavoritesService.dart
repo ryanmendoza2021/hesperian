@@ -25,6 +25,15 @@ class FavoritesService {
     }
   }
 
+  static toggleFavorite (String route) {
+    if (!_favorites.contains(route)) {
+      addFavorite(route);
+    }
+    else {
+      deleteFavorite(route);
+    }
+  }
+
   static bool isFavorite(String route) {
     return _favorites.contains(route);
   }

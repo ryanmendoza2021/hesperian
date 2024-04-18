@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hesperidas/post/RouteGenerator.dart';
+import 'package:hesperidas/post/RoutesBodyService.dart';
 import 'package:hesperidas/utils/FavoritesService.dart';
 
 import '../utils/NavigationRouteService.dart';
@@ -45,7 +45,7 @@ class FavoriteMenuViewState extends State<FavoriteMenuView> {
                       children: <Widget>[
                         Expanded(
                           child: ListTile(
-                            title: Text(RouteGenerator.getDataRouter(route)['nombre']),
+                            title: Text(RoutesBodyService.getDataOf(route).getTitle()),
                             tileColor: Colors.white60,
                           ),
                         ),
@@ -60,11 +60,9 @@ class FavoriteMenuViewState extends State<FavoriteMenuView> {
                   ),
                 );
               },
-            ): const Expanded(
-              child: ListTile(
-                title: Text("Aquí aparecerán tus post favoritos, sólo ve a un Post y dale en: Agregar a Favoritos"),
-                tileColor: Colors.white60,
-              ),
+            ):  const ListTile(
+              title: Text("Aquí aparecerán tus post favoritos, sólo ve a un Post y dale en: Agregar a Favoritos"),
+              tileColor: Colors.white60,
             ),
           ),
         ),
