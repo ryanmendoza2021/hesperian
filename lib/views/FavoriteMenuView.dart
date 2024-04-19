@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hesperidas/blocs/FavoritesBloc.dart';
 import 'package:hesperidas/post/RoutesBodyService.dart';
-import 'package:hesperidas/utils/FavoritesService.dart';
-
 import '../utils/NavigationRouteService.dart';
-
 
 class FavoriteMenuView extends StatefulWidget {
   const FavoriteMenuView({super.key});
@@ -14,27 +13,22 @@ class FavoriteMenuView extends StatefulWidget {
 
 class FavoriteMenuViewState extends State<FavoriteMenuView> {
   static String titleMenu = 'Tus Favoritos';
-  static List<String> favorites = FavoritesService.getFavorites();
-
-  deleteFavorite (route) {
-    FavoritesService.deleteFavorite(route);
-    setState (() {
-      favorites = FavoritesService.getFavorites();
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
+    final blocFavorites = BlocProvider.of<FavoritesBloc>(context, listen: true);
+    final blocFavoritesRead = BlocProvider.of<FavoritesBloc>(context, listen: false);
+
     return Scaffold(
       body: Center(
         child: Hero(
           tag: 'ListTile-Hero',
           child: Material(
-            child: (favorites.isNotEmpty)?
+            child: (blocFavorites.getFavorites().isNotEmpty)?
               ListView.builder(
-              itemCount: favorites.length,
+              itemCount: blocFavorites.getCountFavorites(),
               itemBuilder: (context, index) {
-                final route = favorites[index];
+                final route = blocFavorites.getFavorites()[index];
                 return InkWell(
                   onTap: () {
                     NavigationRouteService.navigateTo(route, context);
@@ -51,7 +45,7 @@ class FavoriteMenuViewState extends State<FavoriteMenuView> {
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            deleteFavorite(route);
+                            blocFavoritesRead.deleteFavorite(route);
                           },
                           child: const Text('Quitar Favorito'),
                         ),

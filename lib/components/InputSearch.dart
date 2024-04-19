@@ -21,6 +21,7 @@ class InputSearchState extends State<InputSearch> {
   @override
   Widget build(BuildContext context) {
     return  TextField(
+      controller: _controller,
       decoration: InputDecoration(
         prefixIcon: const Icon(Icons.search),
         suffixIcon:  IconButton(

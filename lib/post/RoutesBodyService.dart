@@ -4,6 +4,7 @@ import 'package:hesperidas/post/posts/PostType2.dart';
 import 'package:hesperidas/post/posts/PostType3.dart';
 import 'package:hesperidas/post/posts/PostType4.dart';
 import 'package:hesperidas/post/posts/PostType5.dart';
+import 'package:hesperidas/post/posts/PostType6.dart';
 import 'posts/PostType1.dart';
 
 final Map<String, Function> menuRoutes = {
@@ -12,6 +13,7 @@ final Map<String, Function> menuRoutes = {
   const PostType3().getRoute(): (() => const PostType3()),
   const PostType4().getRoute(): (() => const PostType4()),
   const PostType5().getRoute(): (() => const PostType5()),
+  const PostType6().getRoute(): (() => const PostType6()),
 };
 
 class RoutesBodyService {

@@ -1,8 +1,7 @@
-import '../post/RoutesBodyService.dart';
-import 'FavoritesService.dart';
+import 'package:hesperidas/blocs/FavoritesBloc.dart';
 
 class ManagerServices {
   static initServices () {
-    FavoritesService.initService();
+    FavoritesBloc.initService();
   }
 }

@@ -24,13 +24,11 @@ class PostType1 extends StatelessWidget implements BodyRouteView{
 
   @override
   String getRoute() {
-    // TODO: implement getRoute
     return '/post1';
   }
 
   @override
   String getTitle() {
-    // TODO: implement getTitle
     return 'Publicación: Pantalla de Inicio';
   }
 
