@@ -23,9 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     ManagerServices.initServices();
     return MultiBlocProvider(
-        providers: [BlocProvider<FavoritesBloc>(
-          create: (BuildContext context) => FavoritesBloc(),
-        ),],
+        providers: GlobalStates.getStatesBlocks(),
         child: const MaterialApp(
           title: 'Hesperian - Rutas Dinámicas',
           home: MainScaffold(),
@@ -57,7 +55,7 @@ class MainScaffold extends StatelessWidget {
               return ListTile(
                 leading: const Icon(Icons.person),
                 title: Text(value.getTitle()),
-                onTap: () => NavigationRouteService.navigateTo(ruta, context),
+                onTap: () => NavigationRouteService.navigateTo(ruta, context: context, pop: true),
               );
             },
           ),

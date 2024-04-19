@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:hesperidas/post/posts/PostType1.dart';
 import 'package:hesperidas/utils/NavigationRouteService.dart';
 import '../views/FavoriteMenuView.dart';
 import 'DialogMenu.dart';
@@ -12,6 +13,8 @@ class ButtonNavigationBar extends StatelessWidget{
     return NavigationBar(
       onDestinationSelected: (int index) {
         switch (index) {
+          case 0:
+            NavigationRouteService.navigateToView(const PostType1());
           case 2:
             DialogMenu.show(context, child: const FavoriteMenuView());
         }

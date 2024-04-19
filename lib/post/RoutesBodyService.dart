@@ -3,8 +3,7 @@ import 'package:hesperidas/post/BodyRouteView.dart';
 import 'package:hesperidas/post/posts/PostType2.dart';
 import 'package:hesperidas/post/posts/PostType3.dart';
 import 'package:hesperidas/post/posts/PostType4.dart';
-import 'package:hesperidas/post/posts/PostType5.dart';
-import 'package:hesperidas/post/posts/PostType6.dart';
+import '../views/SearchPostView.dart';
 import 'posts/PostType1.dart';
 
 final Map<String, Function> menuRoutes = {
@@ -12,13 +11,11 @@ final Map<String, Function> menuRoutes = {
   const PostType2().getRoute(): (() => const PostType2()),
   const PostType3().getRoute(): (() => const PostType3()),
   const PostType4().getRoute(): (() => const PostType4()),
-  const PostType5().getRoute(): (() => const PostType5()),
-  const PostType6().getRoute(): (() => const PostType6()),
+  const SearchPostView().getRoute(): (() => const SearchPostView()),
 };
 
 class RoutesBodyService {
-
-  static int numMenuRoutes = menuRoutes.length;
+  static int numMenuRoutes = 4;
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     var route = settings.name.toString();
@@ -41,7 +38,7 @@ class RoutesBodyService {
           child: child,
         );
       },
-      transitionDuration: const Duration(milliseconds: 300), // Duración de la transición
+      transitionDuration: const Duration(milliseconds: 100), // Duración de la transición
     );
   }
 

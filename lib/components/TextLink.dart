@@ -1,19 +1,36 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:hesperidas/components/TextSectionBase.dart';
+import 'package:hesperidas/utils/NavigationRouteService.dart';
 
-class TextLink extends StatelessWidget {
+class LinkText implements TextSectionBase {
   final String text;
   final String url;
 
-  const TextLink(this.text, this.url, {super.key});
+  LinkText(this.text, this.url);
 
   @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      //onTap: () => Navegator Route o Web(url)
-      child: Text(
-        text,
-        style: const TextStyle(color: Colors.blue),
-      ),
+  TextSpan buildTextSpan() {
+    return TextSpan(
+      // Utiliza WidgetSpan para integrar el widget en el RichText
+      style: const TextStyle(color: Colors.black),
+      children: [
+        WidgetSpan(
+          alignment: PlaceholderAlignment.middle,
+          child: InkWell(
+            onTap: () => NavigationRouteService.navigateTo(url),
+            splashColor: Colors.blue.withAlpha(30),
+            child: Text(
+              ' $text ',
+              style: const TextStyle(
+                color: Colors.indigo,
+                fontSize: 18,
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
+
 }

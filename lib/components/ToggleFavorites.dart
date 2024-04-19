@@ -21,7 +21,7 @@ class ToggleFavoritesState extends State<ToggleFavorites> {
 
     return Card.filled(color: Colors.transparent, child: SizedBox(
       width: 300,
-      height: 70,
+      height: 60,
       child: Center(child: ElevatedButton(onPressed: () {
         blocFavoritesRead.toggleFavorite(route);
       }, child: blocFavorites.isFavorite(route) ? const Text('Quitar de Favoritos'): const Text('Agregar a Favoritos'))),

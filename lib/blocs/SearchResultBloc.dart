@@ -1,56 +1,50 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:hesperidas/post/IndexSearchPost.dart';
+
+import '../utils/Utils.dart';
 
 class SearchResultBloc extends Cubit<List<String>> {
+  static late Map<String, String> indexPost;
+  static final Map<String, String> _searchResult = {};
 
-  static const String _keyFavorite = 'Favorite';
-  static SharedPreferences? _preferences;
-  static List<String> _favorites = [];
-
-  static initService () async {
-    _preferences = await SharedPreferences.getInstance();
-    _favorites = _preferences?.getStringList(_keyFavorite) ?? [];
+  static initService() {
+    // Inicializar con claves que también son los valores
+    indexPost = IndexSearchPost.getIndexForSearch();
   }
 
-  SearchResultBloc() : super(_favorites);
-  void updateFavorites(List<String> favoritesUpdate) {
-    emit(favoritesUpdate);
-  }
+  SearchResultBloc() : super(_searchResult.values.toList());
 
-  void addFavorite (String route) {
-    if (!_favorites.contains(route)) {
-      _favorites.insert(0, route);
-      _preferences?.setStringList(_keyFavorite, _favorites);
-      emit(List<String>.from(_favorites));
+  void searchPost(String query) {
+    _searchResult.clear();
+    for (var indexTitle in indexPost.keys) {
+      if (indexTitle.contains(Utils.clearString(query)) && indexPost[indexTitle] != null) {
+        _searchResult[indexTitle] = indexPost[indexTitle]!;
+      }
+      if (_searchResult.length > 20) {
+        break;
+      }
     }
+    emit(List<String>.from(_searchResult.keys));
   }
 
-  void deleteFavorite (String route) {
-    if (_favorites.contains(route)) {
-      _favorites.remove(route);
-      _preferences?.setStringList(_keyFavorite, _favorites);
-      emit(List<String>.from(_favorites));
-    }
+  void clearSearch() {
+    _searchResult.clear();
+    emit(List<String>.from(_searchResult.keys));
   }
 
-  void toggleFavorite (String route) {
-    if (!_favorites.contains(route)) {
-      addFavorite(route);
-    }
-    else {
-      deleteFavorite(route);
-    }
+  int getCountSearchResult() {
+    return state.length;
   }
 
-  bool isFavorite(String route) {
-    return _favorites.contains(route);
+  bool searchIsEmpty() {
+    return !state.isNotEmpty;
   }
 
-  List<String> getFavorites() {
+  List<String> getSearchResult() {
     return state;
   }
 
-  int getCountFavorites() {
-    return state.length;
+  String getRouteOfResult(String key) {
+    return _searchResult[key] ?? '';
   }
 }

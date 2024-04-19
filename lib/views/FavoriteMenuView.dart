@@ -31,7 +31,7 @@ class FavoriteMenuViewState extends State<FavoriteMenuView> {
                 final route = blocFavorites.getFavorites()[index];
                 return InkWell(
                   onTap: () {
-                    NavigationRouteService.navigateTo(route, context);
+                    NavigationRouteService.navigateTo(route, context: context, pop: true);
                   },
                   child: Container(
                     padding: const EdgeInsets.all(8.0),
@@ -55,7 +55,7 @@ class FavoriteMenuViewState extends State<FavoriteMenuView> {
                 );
               },
             ):  const ListTile(
-              title: Text("Aquí aparecerán tus post favoritos, sólo ve a un Post y dale en: Agregar a Favoritos"),
+              title: Center(child: Text("Aquí aparecerán tus post favoritos, sólo ve a un Post y dale en: Agregar a Favoritos")),
               tileColor: Colors.white60,
             ),
           ),
