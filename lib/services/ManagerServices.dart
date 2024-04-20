@@ -4,8 +4,8 @@ import '../blocs/SearchResultBloc.dart';
 import '../post/IndexSearchPost.dart';
 
 class ManagerServices {
-  static initServices () {
-    FavoritesBloc.initService();
+  static initServices () async {
+    await FavoritesBloc.initService();
     SearchResultBloc.initService();
     IndexSearchPost.initService();
   }

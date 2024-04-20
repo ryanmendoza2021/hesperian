@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hesperidas/post/posts/PostType1.dart';
-import 'package:hesperidas/utils/NavigationRouteService.dart';
+import '../services/NavigationRouteService.dart';
 import '../views/FavoriteMenuView.dart';
 import 'DialogMenu.dart';
 

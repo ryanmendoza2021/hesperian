@@ -4,13 +4,12 @@ import 'package:hesperidas/blocs/GlobalStates.dart';
 import 'package:hesperidas/components/InputSearch.dart';
 import 'package:hesperidas/post/BodyRouteView.dart';
 import 'package:hesperidas/post/RoutesBodyService.dart';
-import 'package:hesperidas/utils/ManagerServices.dart';
-import 'package:hesperidas/utils/NavigationRouteService.dart';
-import 'blocs/FavoritesBloc.dart';
+import 'package:hesperidas/services/ManagerServices.dart';
+import 'package:hesperidas/services/NavigationRouteService.dart';
 import 'components/BottonNavigationBar.dart';
-import 'post/RoutesBodyService.dart' as routeUtils;
 
-void main() {
+Future<void> main() async {
+  await ManagerServices.initServices();
   runApp(MyApp());
 }
 
@@ -21,7 +20,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ManagerServices.initServices();
     return MultiBlocProvider(
         providers: GlobalStates.getStatesBlocks(),
         child: const MaterialApp(

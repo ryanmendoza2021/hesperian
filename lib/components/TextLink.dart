@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hesperidas/components/TextSectionBase.dart';
-import 'package:hesperidas/utils/NavigationRouteService.dart';
+import 'package:hesperidas/services/NavigationRouteService.dart';
 
 class LinkText implements TextSectionBase {
   final String text;

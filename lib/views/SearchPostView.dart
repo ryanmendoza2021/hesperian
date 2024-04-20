@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hesperidas/blocs/SearchResultBloc.dart';
 import 'package:hesperidas/post/BodyRouteView.dart';
 import 'package:hesperidas/post/RoutesBodyService.dart';
-import '../utils/NavigationRouteService.dart';
+import '../services/NavigationRouteService.dart';
 
 
 class SearchPostView extends StatefulWidget implements BodyRouteView{

@@ -9,13 +9,10 @@ class FavoritesBloc extends Cubit<List<String>> {
 
   static initService () async {
     _preferences = await SharedPreferences.getInstance();
-    _favorites = _preferences?.getStringList(_keyFavorite) ?? [];
+    _favorites = _preferences?.getStringList(_keyFavorite) ?? ['/post2'];
   }
 
   FavoritesBloc() : super(_favorites);
-  void updateFavorites(List<String> favoritesUpdate) {
-    emit(favoritesUpdate);
-  }
 
   void addFavorite (String route) {
     if (!_favorites.contains(route)) {

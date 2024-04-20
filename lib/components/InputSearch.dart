@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hesperidas/views/SearchPostView.dart';
 
 import '../blocs/SearchResultBloc.dart';
-import '../utils/NavigationRouteService.dart';
+import '../services/NavigationRouteService.dart';
 
 class InputSearch extends StatefulWidget {
   const InputSearch({super.key});
