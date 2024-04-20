@@ -31,7 +31,7 @@ class RoutesBodyService {
         child: getViewOf(route),
       ),
       transitionsBuilder: Animator.deslizar,
-      transitionDuration: const Duration(milliseconds: 100), // Duración de la transición
+      transitionDuration: const Duration(milliseconds: 80), // Duración de la transición
     );
   }
 

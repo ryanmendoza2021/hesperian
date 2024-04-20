@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hesperidas/blocs/FavoritesBloc.dart';
 import 'package:hesperidas/blocs/SearchResultBloc.dart';
 
+import '../services/ManagerServices.dart';
+
 class GlobalStates {
   static final List<BlocProvider> _globalsStates = [
     BlocProvider<FavoritesBloc>(
@@ -12,7 +14,7 @@ class GlobalStates {
       create: (BuildContext context) => SearchResultBloc(),
     ),
   ];
-  static getStatesBlocks () {
+  static getStatesBlocks ()  {
     return _globalsStates;
   }
 }

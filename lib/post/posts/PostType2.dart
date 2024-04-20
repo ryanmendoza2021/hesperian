@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:hesperidas/components/NormalText.dart';
-import 'package:hesperidas/components/TextLink.dart';
-import 'package:hesperidas/components/ToggleFavorites.dart';
+import 'package:hesperidas/components/postComponentsUi/CustomLinkButton.dart';
+import 'package:hesperidas/components/postComponentsUi/NormalText.dart';
+import 'package:hesperidas/components/postComponentsUi/PaddingPost.dart';
+import 'package:hesperidas/components/postComponentsUi/TextLink.dart';
+import 'package:hesperidas/components/postComponentsUi/ToggleFavorites.dart';
 import 'package:hesperidas/post/BodyRouteView.dart';
 import 'package:hesperidas/post/posts/PostType3.dart';
-import '../../components/SpanText.dart';
-import '../../components/TextSection.dart';
+import '../../components/postComponentsUi/AccirdionPost.dart';
+import '../../components/postComponentsUi/ImageAssetPost.dart';
+import '../../components/postComponentsUi/SpanText.dart';
+import '../../components/postComponentsUi/TextSection.dart';
 
 class PostType2 extends StatelessWidget implements BodyRouteView {
   const PostType2({super.key});
@@ -19,26 +23,49 @@ class PostType2 extends StatelessWidget implements BodyRouteView {
   Widget build(BuildContext context) {
     return SizedBox.expand(
       child: Container(
-        color: Colors.blue,
-        child: Column(children: <Widget>[
+        color: Colors.white70,
+        child: SingleChildScrollView(
+            child: Column(children: <Widget>[
           ToggleFavorites(route: getRoute()),
-          Card.filled(
-              color: Colors.white,
-              child: SizedBox(
-                child: Column(children: <Widget>[
-                  Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: TextSection(
-                        textWidgets: [
-                          NormalText(section1),
-                          SpanText(spanText),
-                          NormalText(section1),
-                          LinkText(linkText, const PostType3().getRoute())
-                        ],
-                      )),
-                ]),
-              )),
-        ]),
+          PaddingPost(
+            children: [
+              TextSection(
+                textWidgets: [
+                  NormalText(section1),
+                  SpanText(spanText),
+                  NormalText(section1),
+                  LinkText(linkText, const PostType3().getRoute())
+                ],
+              ),
+              CustomAccordionList(
+                sections: [
+                  CustomAccordionSection(
+                    header: const Text('Sección 1: Información General'),
+                    content:
+                        const Text('Aquí va el contenido detallado de la Sección 1.'),
+                  ),
+                  CustomAccordionSection(
+                    header: const Text('Sección 2: Detalles Técnicos'),
+                    content:
+                        const Text('Aquí va el contenido detallado de la Sección 2.'),
+                  ),
+                  CustomAccordionSection(
+                    header: const Text('Sección 3: FAQs'),
+                    content:
+                        const Text('Aquí va el contenido detallado de la Sección 3.'),
+                  ),
+                  CustomAccordionSection(
+                    header: const Text('Sección 2: Detalles Técnicos'),
+                    content:
+                        const Text('Aquí va el contenido detallado de la Sección 2.'),
+                  )
+                ],
+              ),
+              const FullWidthImage(imagePath: 'assets/post/image1.jpg'),
+              CustomLinkButton( link: const PostType3().getRoute())
+            ],
+          ),
+        ])),
       ),
     );
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:hesperidas/components/TextSectionBase.dart';
+import 'package:hesperidas/components/postComponentsUi/TextSectionBase.dart';
 import 'package:hesperidas/services/NavigationRouteService.dart';
 
 class LinkText implements TextSectionBase {
@@ -17,7 +17,8 @@ class LinkText implements TextSectionBase {
       children: [
         WidgetSpan(
           alignment: PlaceholderAlignment.middle,
-          child: InkWell(
+          child: Material(
+              child: InkWell(
             onTap: () => NavigationRouteService.navigateTo(url),
             splashColor: Colors.blue.withAlpha(30),
             child: Text(
@@ -27,10 +28,9 @@ class LinkText implements TextSectionBase {
                 fontSize: 18,
               ),
             ),
-          ),
+          )),
         ),
       ],
     );
   }
-
 }

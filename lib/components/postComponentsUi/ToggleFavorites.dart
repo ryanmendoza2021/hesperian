@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../blocs/FavoritesBloc.dart';
+import '../../blocs/FavoritesBloc.dart';
 
 class ToggleFavorites extends StatefulWidget {
   final route;

@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:hesperidas/components/ToggleFavorites.dart';
+import 'package:hesperidas/components/postComponentsUi/ToggleFavorites.dart';
 import 'package:hesperidas/post/BodyRouteView.dart';
 
 class PostType5 extends StatelessWidget implements BodyRouteView{

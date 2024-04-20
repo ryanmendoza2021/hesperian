@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:hesperidas/components/TextSectionBase.dart';
+import 'package:hesperidas/components/postComponentsUi/TextSectionBase.dart';
 
 class NormalText implements TextSectionBase {
   final String text;
