@@ -7,7 +7,7 @@ class IndexSearchPost {
   static final Map<String, String> searchIndexSearch = {};
 
   static initService () {
-    menuRoutes.forEach((route, createViewFunction) {
+    routesBodyViews.forEach((route, createViewFunction) {
       BodyRouteView data = RoutesBodyService.getDataOf(route);
       searchIndexSearch[Utils.clearString(data.getTitle())] = data.getRoute();
     });

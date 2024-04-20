@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hesperidas/post/BodyRouteView.dart';
 
-class NotFoundView extends StatelessWidget {
-  final String message;
+class NotFoundView extends StatelessWidget implements BodyRouteView{
 
   const NotFoundView({
     super.key,
-    this.message = "La página que buscas no ha sido encontrada.",
   });
 
   @override
@@ -26,7 +25,7 @@ class NotFoundView extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Text(
-              message,
+              getTitle(),
               style: const TextStyle(
                 fontSize: 24,
                 color: Colors.black54,
@@ -39,14 +38,29 @@ class NotFoundView extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Volver atrás'),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue, // Background color
+                backgroundColor: Colors.blue,
               ),
+              child: const Text('Volver atrás', style: TextStyle(color: Colors.white),),
             )
           ],
         ),
       ),
     );
+  }
+
+  @override
+  String getRoute() {
+    return 'NotFoundView';
+  }
+
+  @override
+  String getTitle() {
+    return 'La página que buscas no ha sido encontrada.';
+  }
+
+  @override
+  bool isPost() {
+    return false;
   }
 }

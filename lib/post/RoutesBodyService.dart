@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hesperidas/post/BodyRouteView.dart';
+import 'package:hesperidas/post/InfoRouteBody.dart';
+import 'package:hesperidas/post/NotFoundView.dart';
 import 'package:hesperidas/post/posts/PostType2.dart';
 import 'package:hesperidas/post/posts/PostType3.dart';
 import 'package:hesperidas/post/posts/PostType4.dart';
@@ -9,15 +11,31 @@ import 'package:hesperidas/utils/Animator.dart';
 import '../views/SearchPostView.dart';
 import 'posts/PostType1.dart';
 
-final Map<String, Function> menuRoutes = {
+final Map<String, Function> routesBodyViews = {
   const PostType1().getRoute(): (() => const PostType1()),
   const PostType2().getRoute(): (() => const PostType2()),
   const PostType3().getRoute(): (() => const PostType3()),
-  const PostType4().getRoute(): (() => const PostType4()),
   const PostType5().getRoute(): (() => const PostType5()),
   const PostType6().getRoute(): (() => const PostType6()),
   const SearchPostView().getRoute(): (() => const SearchPostView()),
 };
+
+final Map<Type, Function> routesBodyViewsType = {
+  PostType1: (() => const PostType1()),
+  PostType2: (() => const PostType2()),
+  PostType3: (() => const PostType3()),
+  PostType4: (() => const PostType4()),
+  PostType5: (() => const PostType5()),
+  PostType6: (() => const PostType6()),
+  SearchPostView: (() => const SearchPostView()),
+};
+
+final Map<Type, InfoRouteBody> routesBodyData = {
+
+};
+
+final InfoRouteBody dataRouteNotView = RoutesBodyService.getDataOfType(NotFoundView);
+
 
 class RoutesBodyService {
   static int numMenuRoutes = 4;
@@ -36,37 +54,51 @@ class RoutesBodyService {
   }
 
   static BodyRouteView getDataOf(String route) {
-    return menuRoutes[route]?.call() as BodyRouteView;
+    var routeBodyView = routesBodyViews[route];
+    return routeBodyView != null ? routeBodyView.call() as BodyRouteView: const NotFoundView() as BodyRouteView;
   }
 
   static Widget getViewOf(String route) {
-    var viewRoute = menuRoutes[route]?.call();
-    if (viewRoute != null) {
-      return viewRoute as Widget;
-    }
-    else {
-      return const Text("El Router esta iniciándose");
-    }
+    var routeBodyView = routesBodyViews[route];
+    return routeBodyView != null ? routeBodyView.call() as Widget: const NotFoundView() as Widget;
   }
 
   static Iterable<String> getMenuRoutesArray() {
-    return menuRoutes.keys.take(numMenuRoutes);
+    return routesBodyViews.keys.take(numMenuRoutes);
   }
 
   static Map<String, Function> getMenuRoutes() {
-    return Map.fromEntries(menuRoutes.entries.take(numMenuRoutes));
+    return Map.fromEntries(routesBodyViews.entries.take(numMenuRoutes));
   }
 
   static Iterable<String> getBodyRoutesArray() {
-    return menuRoutes.keys;
+    return routesBodyViews.keys;
   }
 
   static Map<String, Function> getBodyRoutes() {
-    return menuRoutes;
+    return routesBodyViews;
   }
 
   static String getIndexRoute() {
-    return menuRoutes.keys.first;
+    return routesBodyViews.keys.first;
   }
 
+
+
+
+  static BodyRouteView getViewOfType(Type typeView) {
+    var routeBodyView = routesBodyViewsType[typeView];
+    return routeBodyView != null ? routeBodyView.call() as BodyRouteView: const NotFoundView() as BodyRouteView;
+  }
+
+  static initService () {
+    routesBodyViewsType.forEach((type, createViewFunction) {
+      BodyRouteView data = RoutesBodyService.getViewOfType(type);
+      routesBodyData[type] = InfoRouteBody(route: data.getRoute(), title: data.getTitle(), isPost: data.isPost());
+    });
+  }
+
+  static InfoRouteBody getDataOfType(Type typeView) {
+    return routesBodyData[typeView] ?? dataRouteNotView;
+  }
 }
