@@ -1,5 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hesperidas/blocs/SearchActive.dart';
 import 'package:hesperidas/views/SearchPostView.dart';
 
 import '../blocs/SearchResultBloc.dart';
@@ -15,18 +19,45 @@ class InputSearch extends StatefulWidget {
 class InputSearchState extends State<InputSearch> {
   final TextEditingController _controller = TextEditingController();
   final FocusNode _focusNode = FocusNode();
+  late StreamSubscription<bool> _subscription;
+
+  void clearInputSearch() {
+    _controller.clear();
+    _focusNode.unfocus();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+
+    _subscription = BlocProvider.of<SearchActive>(context)
+        .stream
+        .listen((activeSearchState) {
+      print(activeSearchState);
+      if (!activeSearchState) {
+        clearInputSearch();
+      } else {
+        _focusNode.requestFocus();
+      }
+    });
+  }
 
   @override
   void dispose() {
-    super.dispose();
+    _subscription.cancel();
     _controller.dispose();
     _focusNode.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final searchResultBloc =
         BlocProvider.of<SearchResultBloc>(context, listen: false);
+    final searchActiveRead =
+        BlocProvider.of<SearchActive>(context, listen: false);
+
     return TextField(
       focusNode: _focusNode,
       controller: _controller,
@@ -34,7 +65,8 @@ class InputSearchState extends State<InputSearch> {
         searchResultBloc.searchPost(text);
         NavigationRouteService.navigateToView(const SearchPostView(),
             replacement: false);
-        WidgetsBinding.instance.addPostFrameCallback((_) {
+        searchActiveRead.setSateSearch(true);
+        SchedulerBinding.instance.addPostFrameCallback((_) {
           _focusNode.requestFocus();
         });
       },
@@ -43,9 +75,8 @@ class InputSearchState extends State<InputSearch> {
         suffixIcon: IconButton(
           icon: const Icon(Icons.clear),
           onPressed: () {
-            _controller.clear();
-            _focusNode.unfocus();
-            if (NavigationRouteService.isCurrentRoute(const SearchPostView())) {
+            searchActiveRead.setSateSearch(false);
+            if (NavigationRouteService.isCurrentRouteOfType(SearchPostView)) {
               NavigationRouteService.goBack();
             }
           },

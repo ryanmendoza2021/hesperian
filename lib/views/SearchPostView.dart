@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hesperidas/blocs/SearchActive.dart';
 import 'package:hesperidas/blocs/SearchResultBloc.dart';
 import 'package:hesperidas/post/BodyRouteView.dart';
 import 'package:hesperidas/post/RoutesBodyService.dart';
@@ -35,21 +36,22 @@ class SearchPostViewState extends State<SearchPostView>{
   Widget build(BuildContext context) {
 
     final searchResultBloc = BlocProvider.of<SearchResultBloc>(context, listen: true);
+    final searchActiveRead = BlocProvider.of<SearchActive>(context, listen: false);
 
     return Scaffold(
       body: Center(
         child: Hero(
-          tag: 'ListTile-Heroo',
+          tag: titleMenu,
           child: Material(
             child: (!searchResultBloc.searchIsEmpty())?
             ListView.builder(
               itemCount: searchResultBloc.getCountSearchResult(),
               itemBuilder: (context, index) {
                 final result = searchResultBloc.getSearchResult()[index];
-                final routeResult = searchResultBloc.getRouteOfResult(result);
                 return InkWell(
                   onTap: () {
-                    NavigationRouteService.navigateTo(routeResult, context: context, pop: true);
+                    searchActiveRead.setSateSearch(false);
+                    NavigationRouteService.navigateTo(result.getRoute(), context: context, pop: true);
                   },
                   child: Container(
                     padding: const EdgeInsets.all(8.0),
@@ -57,7 +59,7 @@ class SearchPostViewState extends State<SearchPostView>{
                       children: <Widget>[
                         Expanded(
                           child: ListTile(
-                            title: Text(RoutesBodyService.getDataOf(routeResult).getTitle()),
+                            title: Text(result.getTitle()),
                             tileColor: Colors.white60,
                           ),
                         ),

@@ -10,8 +10,8 @@ class SpanText implements TextSectionBase {
   @override
   TextSpan buildTextSpan() {
     return TextSpan(
-      text: ' $text ',
-      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+      text: '$text ',
+      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
     );
   }
 }

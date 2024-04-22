@@ -4,10 +4,10 @@ import 'package:hesperidas/components/postComponentsUi/TextSectionBase.dart';
 import 'package:hesperidas/services/NavigationRouteService.dart';
 
 class LinkText implements TextSectionBase {
-  final String text;
-  final String url;
+  final String label;
+  final String link;
 
-  LinkText(this.text, this.url);
+  LinkText({required this.label,required this.link});
 
   @override
   TextSpan buildTextSpan() {
@@ -19,13 +19,13 @@ class LinkText implements TextSectionBase {
           alignment: PlaceholderAlignment.middle,
           child: Material(
               child: InkWell(
-            onTap: () => NavigationRouteService.navigateTo(url),
+            onTap: () => NavigationRouteService.navigateTo(link),
             splashColor: Colors.blue.withAlpha(30),
             child: Text(
-              ' $text ',
+              '$label ',
               style: const TextStyle(
                 color: Colors.indigo,
-                fontSize: 18,
+                fontSize: 16,
               ),
             ),
           )),

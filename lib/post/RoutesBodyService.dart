@@ -17,54 +17,61 @@ final Map<String, Function> routesBodyViews = {
   const PostType3().getRoute(): (() => const PostType3()),
   const PostType5().getRoute(): (() => const PostType5()),
   const PostType6().getRoute(): (() => const PostType6()),
+  const NotFoundView().getRoute(): (() => const NotFoundView()),
   const SearchPostView().getRoute(): (() => const SearchPostView()),
 };
 
-final Map<Type, Function> routesBodyViewsType = {
-  PostType1: (() => const PostType1()),
-  PostType2: (() => const PostType2()),
-  PostType3: (() => const PostType3()),
-  PostType4: (() => const PostType4()),
-  PostType5: (() => const PostType5()),
-  PostType6: (() => const PostType6()),
-  SearchPostView: (() => const SearchPostView()),
-};
+final Map<Type, InfoRouteBody> routesBodyData = {};
 
-final Map<Type, InfoRouteBody> routesBodyData = {
-
-};
-
-final InfoRouteBody dataRouteNotView = RoutesBodyService.getDataOfType(NotFoundView);
-
+final InfoRouteBody dataRouteNotView = InfoRouteBody(
+    route_: const NotFoundView().getRoute(),
+    title_: const NotFoundView().getRoute(),
+    isPost_: const NotFoundView().isPost());
 
 class RoutesBodyService {
   static int numMenuRoutes = 4;
 
-  static Route<dynamic> generateRoute(RouteSettings settings) {
+  static Route<Widget> generateRoute(RouteSettings settings) {
     var route = settings.name.toString();
 
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => Container(
-        color: Colors.white,  // Aplica el color de fondo
+        color: Colors.white, // Aplica el color de fondo
         child: getViewOf(route),
       ),
       transitionsBuilder: Animator.deslizar,
-      transitionDuration: const Duration(milliseconds: 80), // Duración de la transición
+      transitionDuration:
+          const Duration(milliseconds: 80), // Duración de la transición
     );
   }
 
-  static BodyRouteView getDataOf(String route) {
+  static Route<Widget> generateRouteView(BodyRouteView newBodyView) {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => Container(
+        color: Colors.white,
+        child: newBodyView as Widget,
+      ),
+      transitionsBuilder: Animator.deslizar,
+      transitionDuration: const Duration(milliseconds: 80),
+    );
+  }
+
+  static BodyRouteView getViewOfRoute(String route) {
     var routeBodyView = routesBodyViews[route];
-    return routeBodyView != null ? routeBodyView.call() as BodyRouteView: const NotFoundView() as BodyRouteView;
+    return routeBodyView != null
+        ? routeBodyView.call() as BodyRouteView
+        : const NotFoundView() as BodyRouteView;
   }
 
   static Widget getViewOf(String route) {
     var routeBodyView = routesBodyViews[route];
-    return routeBodyView != null ? routeBodyView.call() as Widget: const NotFoundView() as Widget;
+    return routeBodyView != null
+        ? routeBodyView.call() as Widget
+        : const NotFoundView() as Widget;
   }
 
-  static Iterable<String> getMenuRoutesArray() {
-    return routesBodyViews.keys.take(numMenuRoutes);
+  static Iterable<InfoRouteBody> getDataMenuArray() {
+    return routesBodyData.values.take(numMenuRoutes);
   }
 
   static Map<String, Function> getMenuRoutes() {
@@ -79,26 +86,58 @@ class RoutesBodyService {
     return routesBodyViews;
   }
 
+  static Map<Type, InfoRouteBody> getBodyData() {
+    return routesBodyData;
+  }
+
   static String getIndexRoute() {
     return routesBodyViews.keys.first;
   }
 
-
-
-
-  static BodyRouteView getViewOfType(Type typeView) {
-    var routeBodyView = routesBodyViewsType[typeView];
-    return routeBodyView != null ? routeBodyView.call() as BodyRouteView: const NotFoundView() as BodyRouteView;
-  }
-
-  static initService () {
-    routesBodyViewsType.forEach((type, createViewFunction) {
-      BodyRouteView data = RoutesBodyService.getViewOfType(type);
-      routesBodyData[type] = InfoRouteBody(route: data.getRoute(), title: data.getTitle(), isPost: data.isPost());
+  static initService() {
+    routesBodyViews.forEach((route, createViewFunction) {
+      BodyRouteView data = RoutesBodyService.getViewOfRoute(route);
+      routesBodyData[data.runtimeType] = InfoRouteBody(
+          route_: data.getRoute(),
+          title_: data.getTitle(),
+          isPost_: data.isPost());
     });
   }
 
   static InfoRouteBody getDataOfType(Type typeView) {
     return routesBodyData[typeView] ?? dataRouteNotView;
+  }
+}
+
+class BodyRouteServiceSearch {
+  static InfoRouteBody getDataOfType(Type typeView) {
+    return routesBodyData[typeView] ?? dataRouteNotView;
+  }
+
+  static InfoRouteBody getDataOfRoute(String route) {
+    for (var dataInfoObject in routesBodyData.values) {
+      if (dataInfoObject.getRoute() == route) {
+        return dataInfoObject;
+      }
+    }
+    return dataRouteNotView;
+  }
+
+  static List<InfoRouteBody> getDataOfRoutes(List<String> routes) {
+    List<InfoRouteBody> result = [];
+    List<String> copyRoutes = List.from(routes);
+    for (var dataInfoObject in routesBodyData.values) {
+      for (var route in copyRoutes) {
+        if (dataInfoObject.getRoute() == route) {
+          result.add(dataInfoObject);
+          copyRoutes.remove(route);
+          break;
+        }
+      }
+      if (routes.isEmpty) {
+        break;
+      }
+    }
+    return result;
   }
 }

@@ -7,6 +7,6 @@ class NormalText implements TextSectionBase {
   NormalText(this.text);
   @override
   TextSpan buildTextSpan() {
-    return TextSpan(text: text, style: const TextStyle(fontSize: 18));
+    return TextSpan(text: '$text ');
   }
 }

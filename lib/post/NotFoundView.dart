@@ -10,6 +10,7 @@ class NotFoundView extends StatelessWidget implements BodyRouteView{
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.all(25),
       width: double.infinity,
       height: double.infinity,
       color: Colors.white,
@@ -21,7 +22,7 @@ class NotFoundView extends StatelessWidget implements BodyRouteView{
             const Icon(
               Icons.error_outline,
               size: 80,
-              color: Colors.red,
+              color: Colors.redAccent,
             ),
             const SizedBox(height: 20),
             Text(
@@ -56,7 +57,7 @@ class NotFoundView extends StatelessWidget implements BodyRouteView{
 
   @override
   String getTitle() {
-    return 'La página que buscas no ha sido encontrada.';
+    return 'El Post que buscas no ha sido encontrado.';
   }
 
   @override

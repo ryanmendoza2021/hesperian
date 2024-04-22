@@ -1,35 +1,41 @@
+
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hesperidas/post/IndexSearchPost.dart';
+import 'package:hesperidas/post/InfoRouteBody.dart';
+import 'package:hesperidas/post/RoutesBodyService.dart';
 
 import '../utils/Utils.dart';
 
-class SearchResultBloc extends Cubit<List<String>> {
-  static late Map<String, String> indexPost;
-  static final Map<String, String> _searchResult = {};
+class SearchResultBloc extends Cubit<List<InfoRouteBody>> {
+  static final List<InfoRouteBody> indexPost = [];
 
   static initService() {
-    // Inicializar con claves que también son los valores
-    indexPost = IndexSearchPost.getIndexForSearch();
+    for (var datObject in RoutesBodyService.getBodyData().values) {
+      indexPost.add(InfoRouteBody(
+          route_: datObject.getRoute(),
+          title_: Utils.clearString(datObject.getTitle()),
+          isPost_: datObject.isPost()));
+    }
   }
 
-  SearchResultBloc() : super(_searchResult.values.toList());
+  SearchResultBloc() : super([]);
 
   void searchPost(String query) {
-    _searchResult.clear();
-    for (var indexTitle in indexPost.keys) {
-      if (indexTitle.contains(Utils.clearString(query)) && indexPost[indexTitle] != null) {
-        _searchResult[indexTitle] = indexPost[indexTitle]!;
+    if (query.isEmpty) {
+      emit([]);
+      return;
+    }
+
+    List<InfoRouteBody> searchResult = [];
+    query = Utils.clearString(query);
+    for (var dataObject in indexPost) {
+      if (dataObject.getTitle().contains(query)) {
+        searchResult.add(dataObject);
       }
-      if (_searchResult.length > 20) {
+      if (searchResult.length > 20) {
         break;
       }
     }
-    emit(List<String>.from(_searchResult.keys));
-  }
-
-  void clearSearch() {
-    _searchResult.clear();
-    emit(List<String>.from(_searchResult.keys));
+    emit(searchResult);
   }
 
   int getCountSearchResult() {
@@ -37,14 +43,11 @@ class SearchResultBloc extends Cubit<List<String>> {
   }
 
   bool searchIsEmpty() {
-    return !state.isNotEmpty;
+    return state.isEmpty;
   }
 
-  List<String> getSearchResult() {
+  List<InfoRouteBody> getSearchResult() {
     return state;
   }
 
-  String getRouteOfResult(String key) {
-    return _searchResult[key] ?? '';
-  }
 }

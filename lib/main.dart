@@ -2,29 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hesperidas/blocs/GlobalStates.dart';
 import 'package:hesperidas/components/InputSearch.dart';
-import 'package:hesperidas/post/BodyRouteView.dart';
+import 'package:hesperidas/post/InfoRouteBody.dart';
 import 'package:hesperidas/post/RoutesBodyService.dart';
 import 'package:hesperidas/services/ManagerServices.dart';
 import 'package:hesperidas/services/NavigationRouteService.dart';
+import 'package:hesperidas/utils/Utils.dart';
 import 'components/BottonNavigationBar.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ManagerServices.initServices();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final NavigationRouteService _navigationService = NavigationRouteService();
 
-  MyApp({super.key});
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
         providers: GlobalStates.getStatesBlocks(),
         child: const MaterialApp(
-          title: 'Hesperian - Rutas Dinámicas',
+          title: 'Sobre ellas',
           home: MainScaffold(),
         ));
   }
@@ -39,23 +39,22 @@ class MainScaffold extends StatelessWidget {
         child: Scaffold(
             appBar: AppBar(
               bottom: const PreferredSize(
-                preferredSize: Size.fromHeight(70.0),
+                preferredSize: Size.fromHeight(60.0),
                 // Establece la altura de tu widget personalizado
                 child: InputSearch(),
               ),
-              title: const Text('Hesperian - Rutas Dinámicas'),
+              title: const Text('Sobre ellas'),
             ),
             drawer: Drawer(
               child: ListView.builder(
-                itemCount: RoutesBodyService.getMenuRoutesArray().length,
+                itemCount: RoutesBodyService.getDataMenuArray().length,
                 itemBuilder: (context, index) {
-                  String ruta =
-                      RoutesBodyService.getMenuRoutesArray().elementAt(index);
-                  BodyRouteView value = RoutesBodyService.getDataOf(ruta);
+                  InfoRouteBody infoData =
+                      RoutesBodyService.getDataMenuArray().elementAt(index);
                   return ListTile(
                     leading: const Icon(Icons.person),
-                    title: Text(value.getTitle()),
-                    onTap: () => NavigationRouteService.navigateTo(ruta,
+                    title: Text(infoData.getTitle()),
+                    onTap: () => NavigationRouteService.navigateTo(infoData.getRoute(),
                         context: context, pop: true),
                   );
                 },

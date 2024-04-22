@@ -5,8 +5,10 @@ import 'package:hesperidas/components/postComponentsUi/PaddingPost.dart';
 import 'package:hesperidas/components/postComponentsUi/TextLink.dart';
 import 'package:hesperidas/components/postComponentsUi/ToggleFavorites.dart';
 import 'package:hesperidas/post/BodyRouteView.dart';
+import 'package:hesperidas/post/InfoRouteBody.dart';
+import 'package:hesperidas/post/RoutesBodyService.dart';
 import 'package:hesperidas/post/posts/PostType3.dart';
-import '../../components/postComponentsUi/AccirdionPost.dart';
+import '../../components/postComponentsUi/AccordionPost.dart';
 import '../../components/postComponentsUi/ImageAssetPost.dart';
 import '../../components/postComponentsUi/SpanText.dart';
 import '../../components/postComponentsUi/TextSection.dart';
@@ -21,6 +23,7 @@ class PostType2 extends StatelessWidget implements BodyRouteView {
 
   @override
   Widget build(BuildContext context) {
+    final InfoRouteBody dataPost3 = BodyRouteServiceSearch.getDataOfType(PostType3);
     return SizedBox.expand(
       child: Container(
         color: Colors.white70,
@@ -34,7 +37,7 @@ class PostType2 extends StatelessWidget implements BodyRouteView {
                   NormalText(section1),
                   SpanText(spanText),
                   NormalText(section1),
-                  LinkText(linkText, const PostType3().getRoute())
+                  LinkText(label: dataPost3.getTitle(), link: dataPost3.getRoute())
                 ],
               ),
               CustomAccordionList(
@@ -62,7 +65,7 @@ class PostType2 extends StatelessWidget implements BodyRouteView {
                 ],
               ),
               const FullWidthImage(imagePath: 'assets/post/image1.jpg'),
-              CustomLinkButton( link: const PostType3().getRoute())
+              CustomLinkButton( link: dataPost3.getRoute(),label: dataPost3.getTitle())
             ],
           ),
         ])),

@@ -1,7 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hesperidas/post/InfoRouteBody.dart';
+import 'package:hesperidas/post/RoutesBodyService.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class FavoritesBloc extends Cubit<List<String>> {
+class FavoritesBloc extends Cubit<List<InfoRouteBody>> {
 
   static const String _keyFavorite = 'Favorite';
   static SharedPreferences? _preferences;
@@ -9,16 +11,16 @@ class FavoritesBloc extends Cubit<List<String>> {
 
   static initService () async {
     _preferences = await SharedPreferences.getInstance();
-    _favorites = _preferences?.getStringList(_keyFavorite) ?? ['/post2'];
+    _favorites = _preferences?.getStringList(_keyFavorite) ?? [];
   }
 
-  FavoritesBloc() : super(_favorites);
+  FavoritesBloc() : super(BodyRouteServiceSearch.getDataOfRoutes(_favorites));
 
   void addFavorite (String route) {
     if (!_favorites.contains(route)) {
       _favorites.insert(0, route);
       _preferences?.setStringList(_keyFavorite, _favorites);
-      emit(List<String>.from(_favorites));
+      emit(BodyRouteServiceSearch.getDataOfRoutes(_favorites));
     }
   }
 
@@ -26,7 +28,7 @@ class FavoritesBloc extends Cubit<List<String>> {
     if (_favorites.contains(route)) {
       _favorites.remove(route);
       _preferences?.setStringList(_keyFavorite, _favorites);
-      emit(List<String>.from(_favorites));
+      emit(BodyRouteServiceSearch.getDataOfRoutes(_favorites));
     }
   }
 
@@ -37,13 +39,18 @@ class FavoritesBloc extends Cubit<List<String>> {
     else {
       deleteFavorite(route);
     }
+    print(_favorites);
   }
 
   bool isFavorite(String route) {
     return _favorites.contains(route);
   }
 
-  List<String> getFavorites() {
+  bool isEmpty() {
+    return _favorites.isEmpty;
+  }
+
+  List<InfoRouteBody> getFavorites() {
     return state;
   }
 

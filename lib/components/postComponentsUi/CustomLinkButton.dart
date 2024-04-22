@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hesperidas/post/RoutesBodyService.dart';
+import 'package:hesperidas/services/NavigationRouteService.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CustomLinkButton extends StatelessWidget {
@@ -42,7 +44,7 @@ class CustomLinkButton extends StatelessWidget {
     if (isWebUrl || forceWeb) {
       _launchURL();
     } else {
-      Navigator.of(context).pushNamed(link);
+      NavigationRouteService.navigateTo(link);
     }
   }
 

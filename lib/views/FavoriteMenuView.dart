@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hesperidas/blocs/FavoritesBloc.dart';
 import 'package:hesperidas/post/RoutesBodyService.dart';
 
+import '../post/InfoRouteBody.dart';
 import '../services/NavigationRouteService.dart';
 
 class FavoriteMenuView extends StatefulWidget {
@@ -25,14 +26,14 @@ class FavoriteMenuViewState extends State<FavoriteMenuView> {
         child: Hero(
           tag: 'ListTile-Hero',
           child: Material(
-            child: (blocFavorites.getFavorites().isNotEmpty)?
+            child: !blocFavorites.isEmpty()?
               ListView.builder(
               itemCount: blocFavorites.getCountFavorites(),
               itemBuilder: (context, index) {
-                final route = blocFavorites.getFavorites()[index];
+                final InfoRouteBody dataObject = blocFavorites.getFavorites()[index];
                 return InkWell(
                   onTap: () {
-                    NavigationRouteService.navigateTo(route, context: context, pop: true);
+                    NavigationRouteService.navigateTo(dataObject.getRoute(), context: context, pop: true);
                   },
                   child: Container(
                     padding: const EdgeInsets.all(8.0),
@@ -40,13 +41,13 @@ class FavoriteMenuViewState extends State<FavoriteMenuView> {
                       children: <Widget>[
                         Expanded(
                           child: ListTile(
-                            title: Text(RoutesBodyService.getDataOf(route).getTitle()),
+                            title: Text(dataObject.getTitle()),
                             tileColor: Colors.white60,
                           ),
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            blocFavoritesRead.deleteFavorite(route);
+                            blocFavoritesRead.deleteFavorite(dataObject.getRoute());
                           },
                           child: const Text('Quitar Favorito'),
                         ),
