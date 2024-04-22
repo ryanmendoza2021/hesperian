@@ -1,23 +1,12 @@
-
 import 'package:flutter/material.dart';
-import 'package:hesperidas/post/BodyRouteView.dart';
-import 'package:hesperidas/components/postComponentsUi/CustomLinkButton.dart';
-import 'package:hesperidas/components/postComponentsUi/HEtiquetas/EtiquetasH.dart';
-import 'package:hesperidas/components/postComponentsUi/LayoutPost.dart';
-import 'package:hesperidas/components/postComponentsUi/NormalText.dart';
-import 'package:hesperidas/components/postComponentsUi/PaddingPost.dart';
-import 'package:hesperidas/components/postComponentsUi/TextLink.dart';
-import 'package:hesperidas/post/InfoRouteBody.dart';
-import 'package:hesperidas/post/RoutesBodyService.dart';
-import '../../components/postComponentsUi/AccordionPost.dart';
-import '../../components/postComponentsUi/ContentSection.dart';
-import '../../components/postComponentsUi/ImageAssetPost.dart';
-import '../../components/postComponentsUi/SpanText.dart';
-import '../../components/postComponentsUi/TextSection.dart';
-import 'PostType2.dart';
+import 'package:hesperidas/services/BodyRouteService/InfoRouteBody.dart';
+import 'package:hesperidas/services/BodyRouteService/RoutesBodyService.dart';
+import '../../../components/postComponentsUi/ImportComponentsPost.dart';
+import '../../BodyRouteViewInterface.dart';
+import '../../posts/ImportPostViews.dart';
 
-class PostType1 extends StatelessWidget implements BodyRouteView{
-  const PostType1({super.key});
+class PostType2 extends StatelessWidget implements BodyRouteViewInterface {
+  const PostType2({super.key});
 
   static const String section2 =
       'It is a long established fact that a reader will long established fact that a reader will be distracted by the readable content of a page whelong established fact that a reader will be distracted by the readable content of a page whelong established fact that a reader will be distracted by the readable content of a page whelong established fact that a reader will be distracted by the readable content of a page whelong established fact that a reader will be distracted by the readable content of a page whebe distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using';
@@ -29,18 +18,13 @@ class PostType1 extends StatelessWidget implements BodyRouteView{
 
   @override
   Widget build(BuildContext context) {
-    final InfoRouteBody dataPost2 =
-    BodyRouteServiceSearch.getDataOfType(PostType2);
-
+    final InfoRouteBody dataPost3 =
+        BodyRouteServiceSearch.getDataOfType(PostType3);
     return LayoutPost(
         route: getRoute(),
         title: getTitle(),
         isPost: isPost(),
         children: <Widget>[
-          const FullWidthImage(
-            margin: EdgeInsets.all(0),
-            imagePath: 'assets/post/image1.jpg',
-          ),
           PaddingPost(
             children: [
               const NormalText(section1),
@@ -50,7 +34,7 @@ class PostType1 extends StatelessWidget implements BodyRouteView{
                   SpanText(spanText),
                   const NormalText(section1),
                   LinkText(
-                      label: dataPost2.getTitle(), link: dataPost2.getRoute()),
+                      label: dataPost3.getTitle(), link: dataPost3.getRoute()),
                 ],
               ),
               CustomAccordionList(
@@ -79,7 +63,7 @@ class PostType1 extends StatelessWidget implements BodyRouteView{
               ),
               const FullWidthImage(imagePath: 'assets/post/image1.jpg'),
               CustomLinkButton(
-                  link: dataPost2.getRoute(), label: dataPost2.getTitle()),
+                  link: dataPost3.getRoute(), label: dataPost3.getTitle()),
               const H1(text: 'Esta es una etiqueta H1'),
               const H2(text: 'Esta es una etiqueta H2'),
               const H3(text: 'Esta es una etiqueta H3'),
@@ -93,7 +77,7 @@ class PostType1 extends StatelessWidget implements BodyRouteView{
                 ],
                 text: section2,
               ),
-              LinkText(label: dataPost2.getTitle(), link: dataPost2.getRoute()),
+              LinkText(label: dataPost3.getTitle(), link: dataPost3.getRoute()),
             ],
           ),
         ]);
@@ -101,17 +85,16 @@ class PostType1 extends StatelessWidget implements BodyRouteView{
 
   @override
   String getRoute() {
-    return '/post3';
+    return '/post2';
   }
 
   @override
   String getTitle() {
-    return 'Página de Inicio, prueba de componentes';
+    return 'Publicación: Post 2, Texto continuo y en medio';
   }
 
   @override
   bool isPost() {
     return true;
   }
-
 }

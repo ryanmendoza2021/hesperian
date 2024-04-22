@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hesperidas/post/BodyRouteView.dart';
 
-class NotFoundView extends StatelessWidget implements BodyRouteView{
+import '../BodyRouteViewInterface.dart';
+
+class NotFoundView extends StatelessWidget implements BodyRouteViewInterface{
 
   const NotFoundView({
     super.key,

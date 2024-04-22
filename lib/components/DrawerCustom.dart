@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../post/InfoRouteBody.dart';
-import '../post/RoutesBodyService.dart';
+import '../services/BodyRouteService/InfoRouteBody.dart';
+import '../services/BodyRouteService/RoutesBodyService.dart';
 import '../services/NavigationRouteService.dart';
 
 class DrawerCustom extends StatelessWidget {

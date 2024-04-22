@@ -1,9 +1,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:hesperidas/components/postComponentsUi/ToggleFavorites.dart';
-import 'package:hesperidas/post/BodyRouteView.dart';
 
-class PostType4 extends StatelessWidget implements BodyRouteView{
+import '../../BodyRouteViewInterface.dart';
+
+class PostType4 extends StatelessWidget implements BodyRouteViewInterface{
   const PostType4({super.key});
 
   @override

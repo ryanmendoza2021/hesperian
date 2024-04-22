@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:hesperidas/post/BodyRouteView.dart';
-import 'package:hesperidas/post/InfoRouteBody.dart';
-import 'package:hesperidas/post/NotFoundView.dart';
-import 'package:hesperidas/post/posts/PostType2.dart';
-import 'package:hesperidas/post/posts/PostType3.dart';
-import 'package:hesperidas/post/posts/PostType4.dart';
-import 'package:hesperidas/post/posts/PostType5.dart';
-import 'package:hesperidas/post/posts/PostType6.dart';
+import 'package:hesperidas/services/BodyRouteService/InfoRouteBody.dart';
 import 'package:hesperidas/utils/Animator.dart';
-import '../views/SearchPostView.dart';
-import 'posts/PostType1.dart';
+import '../../views/BodyRouteViewInterface.dart';
+import '../../views/SearchPostView.dart';
+import '../../views/posts/ImportPostViews.dart';
+import '../../views/posts/NotFoundView.dart';
 
 final Map<String, Function> routesBodyViews = {
   const PostType1().getRoute(): (() => const PostType1()),
@@ -45,7 +40,7 @@ class RoutesBodyService {
     );
   }
 
-  static Route<Widget> generateRouteView(BodyRouteView newBodyView) {
+  static Route<Widget> generateRouteView(BodyRouteViewInterface newBodyView) {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => Container(
         color: Colors.white,
@@ -56,11 +51,11 @@ class RoutesBodyService {
     );
   }
 
-  static BodyRouteView getViewOfRoute(String route) {
+  static BodyRouteViewInterface getViewOfRoute(String route) {
     var routeBodyView = routesBodyViews[route];
     return routeBodyView != null
-        ? routeBodyView.call() as BodyRouteView
-        : const NotFoundView() as BodyRouteView;
+        ? routeBodyView.call() as BodyRouteViewInterface
+        : const NotFoundView() as BodyRouteViewInterface;
   }
 
   static Widget getViewOf(String route) {
@@ -96,7 +91,7 @@ class RoutesBodyService {
 
   static initService() {
     routesBodyViews.forEach((route, createViewFunction) {
-      BodyRouteView data = RoutesBodyService.getViewOfRoute(route);
+      BodyRouteViewInterface data = RoutesBodyService.getViewOfRoute(route);
       routesBodyData[data.runtimeType] = InfoRouteBody(
           route_: data.getRoute(),
           title_: data.getTitle(),

@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hesperidas/post/InfoRouteBody.dart';
-import 'package:hesperidas/post/RoutesBodyService.dart';
+import 'package:hesperidas/services/BodyRouteService/InfoRouteBody.dart';
+import 'package:hesperidas/services/BodyRouteService/RoutesBodyService.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FavoritesBloc extends Cubit<List<InfoRouteBody>> {

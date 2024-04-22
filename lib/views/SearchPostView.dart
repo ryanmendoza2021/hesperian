@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hesperidas/blocs/SearchActive.dart';
 import 'package:hesperidas/blocs/SearchResultBloc.dart';
-import 'package:hesperidas/post/BodyRouteView.dart';
-import 'package:hesperidas/post/RoutesBodyService.dart';
+import 'package:hesperidas/views/BodyRouteViewInterface.dart';
 import '../services/NavigationRouteService.dart';
 
-
-class SearchPostView extends StatefulWidget implements BodyRouteView{
+class SearchPostView extends StatefulWidget implements BodyRouteViewInterface{
   const SearchPostView({super.key});
   @override
   SearchPostViewState createState() => SearchPostViewState();

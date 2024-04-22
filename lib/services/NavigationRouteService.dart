@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:hesperidas/post/BodyRouteView.dart';
-import 'package:hesperidas/post/NotFoundView.dart';
-import '../post/RoutesBodyService.dart';
+import '../views/BodyRouteViewInterface.dart';
+import 'BodyRouteService/RoutesBodyService.dart';
 
 class NavigationRouteService {
   static List<String> lastRoutes = [RoutesBodyService.getIndexRoute()];
@@ -24,7 +23,7 @@ class NavigationRouteService {
     }
   }
 
-  static void navigateToView(BodyRouteView routeView,
+  static void navigateToView(BodyRouteViewInterface routeView,
       {BuildContext? context, bool replacement = true, bool pop = false}) {
     if (pop && context != null) {
       Navigator.of(context).pop();
@@ -64,7 +63,7 @@ class NavigationRouteService {
     return (BodyRouteServiceSearch.getDataOfType(routeViewType).getRoute() == getCurrentRoute());
   }
 
-  static bool isCurrentRouteOfRoute(BodyRouteView routeView) {
+  static bool isCurrentRouteOfRoute(BodyRouteViewInterface routeView) {
     return (routeView.getRoute() == getCurrentRoute());
   }
 }

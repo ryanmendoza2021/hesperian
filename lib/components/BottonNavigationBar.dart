@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
-import 'package:hesperidas/post/posts/PostType1.dart';
 import '../services/NavigationRouteService.dart';
 import '../views/FavoriteMenuView.dart';
+import '../views/posts/postViews/PostType1.dart';
 import 'DialogMenu.dart';
 
 class ButtonNavigationBar extends StatelessWidget{
@@ -22,9 +22,7 @@ class ButtonNavigationBar extends StatelessWidget{
       indicatorColor: Colors.amber,
       destinations: const <Widget>[
         NavigationDestination(
-          selectedIcon: Icon(Icons.home),
-          icon: Icon(Icons.home_outlined),
-          label: 'Home',
+          icon: Icon(Icons.home_outlined), label: 'Inicio',
         ),
         NavigationDestination(
           icon: Badge(child: Icon(Icons.notifications_sharp)),
@@ -32,7 +30,6 @@ class ButtonNavigationBar extends StatelessWidget{
         ),
         NavigationDestination(
           icon: Icon(Icons.star_border), label: 'Favoritos',
-
         ),
       ],
     );

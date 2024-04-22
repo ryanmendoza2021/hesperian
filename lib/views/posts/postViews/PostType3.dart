@@ -1,23 +1,14 @@
 
 import 'package:flutter/material.dart';
-import 'package:hesperidas/components/postComponentsUi/NormalText.dart';
-import 'package:hesperidas/post/BodyRouteView.dart';
-
-import '../../components/postComponentsUi/AccordionPost.dart';
-import '../../components/postComponentsUi/ContentSection.dart';
-import '../../components/postComponentsUi/CustomLinkButton.dart';
-import '../../components/postComponentsUi/HEtiquetas/EtiquetasH.dart';
-import '../../components/postComponentsUi/ImageAssetPost.dart';
-import '../../components/postComponentsUi/LayoutPost.dart';
-import '../../components/postComponentsUi/PaddingPost.dart';
-import '../../components/postComponentsUi/SpanText.dart';
-import '../../components/postComponentsUi/TextLink.dart';
-import '../../components/postComponentsUi/TextSection.dart';
-import '../InfoRouteBody.dart';
-import '../RoutesBodyService.dart';
+import '../../../components/postComponentsUi/ImportComponentsPost.dart';
+import '../../../services/BodyRouteService/InfoRouteBody.dart';
+import '../../../services/BodyRouteService/RoutesBodyService.dart';
+import '../ImportPostViews.dart';
+import '../../BodyRouteViewInterface.dart';
 import 'PostType2.dart';
 
-class PostType3 extends StatelessWidget implements BodyRouteView{
+
+class PostType3 extends StatelessWidget implements BodyRouteViewInterface{
   const PostType3({super.key});
   static const String section2 =
       'It is a long established fact that a reader will long established fact that a reader will be distracted by the readable content of a page whelong established fact that a reader will be distracted by the readable content of a page whelong established fact that a reader will be distracted by the readable content of a page whelong established fact that a reader will be distracted by the readable content of a page whelong established fact that a reader will be distracted by the readable content of a page whebe distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using';

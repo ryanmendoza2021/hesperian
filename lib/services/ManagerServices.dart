@@ -1,6 +1,6 @@
 import 'package:hesperidas/blocs/FavoritesBloc.dart';
 import '../blocs/SearchResultBloc.dart';
-import '../post/RoutesBodyService.dart';
+import 'BodyRouteService/RoutesBodyService.dart';
 
 class ManagerServices {
   static initServices () async {
