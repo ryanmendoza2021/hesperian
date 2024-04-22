@@ -17,7 +17,7 @@ class TextSection extends StatelessWidget {
       margin: margin,
       child: RichText(
         text: TextSpan(
-          style: const TextStyle(color: Colors.black, fontSize: 16),
+          style: const TextStyle(color: Colors.black, fontSize: 16, height: 1.5),
           children: textWidgets.map((section) => section.buildTextSpan()).toList(),
         ),
       ),

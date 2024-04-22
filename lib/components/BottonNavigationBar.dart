@@ -31,10 +31,8 @@ class ButtonNavigationBar extends StatelessWidget{
           label: 'Notifications',
         ),
         NavigationDestination(
-          icon: Badge(
-            child: Icon(Icons.star_border),
-          ),
-          label: 'Favoritos',
+          icon: Icon(Icons.star_border), label: 'Favoritos',
+
         ),
       ],
     );

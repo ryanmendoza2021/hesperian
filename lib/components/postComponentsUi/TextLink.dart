@@ -3,34 +3,42 @@ import 'package:flutter/material.dart';
 import 'package:hesperidas/components/postComponentsUi/TextSectionBase.dart';
 import 'package:hesperidas/services/NavigationRouteService.dart';
 
-class LinkText implements TextSectionBase {
+class LinkText extends StatelessWidget implements TextSectionBase {
   final String label;
   final String link;
 
-  LinkText({required this.label,required this.link});
+  const LinkText({super.key, required this.label, required this.link});
 
   @override
   TextSpan buildTextSpan() {
     return TextSpan(
-      // Utiliza WidgetSpan para integrar el widget en el RichText
       style: const TextStyle(color: Colors.black),
       children: [
         WidgetSpan(
-          alignment: PlaceholderAlignment.middle,
-          child: Material(
-              child: InkWell(
-            onTap: () => NavigationRouteService.navigateTo(link),
-            splashColor: Colors.blue.withAlpha(30),
-            child: Text(
-              '$label ',
-              style: const TextStyle(
-                color: Colors.indigo,
-                fontSize: 16,
-              ),
-            ),
-          )),
-        ),
+            alignment: PlaceholderAlignment.middle,
+            child: textLinkBuild(label: label, link: link)),
       ],
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return textLinkBuild(label: label, link: link);
+  }
+
+  static Widget textLinkBuild({required label, required link}) {
+    return Material(
+        child: InkWell(
+      onTap: () => NavigationRouteService.navigateTo(link),
+      splashColor: Colors.blue.withAlpha(30),
+      child: Text(
+        textAlign: TextAlign.start,
+        '$label ',
+        style: const TextStyle(
+          color: Colors.indigo,
+          fontSize: 16,
+        ),
+      ),
+    ));
   }
 }

@@ -10,7 +10,7 @@ class PaddingPost extends StatelessWidget {
     super.key,
     required this.children,
     this.horizontalPadding = 20, // Padding horizontal por defecto
-    this.verticalPadding = 20, // Padding vertical por defecto
+    this.verticalPadding = 0, // Padding vertical por defecto
     this.margin = const EdgeInsets.only(bottom: 8.0),
   });
 
