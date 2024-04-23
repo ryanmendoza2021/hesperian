@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hesperidas/utils/Utils.dart';
+
+import '../utils/ThemeCustom.dart';
+import 'InputSearch.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -13,9 +17,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      toolbarHeight: 1000,
       iconTheme: const IconThemeData(color: Colors.white),
-      backgroundColor: Colors.purple,
-      bottom: bottom,
+      backgroundColor: ThemeCustom.colorPrimary.withOpacity(0.9),
+      bottom: const PreferredSize(
+        preferredSize: Size.fromHeight(0.0),
+        child: InputSearch(),
+      ),
       title: Text(
         title,
         style: const TextStyle(color: Colors.white),
@@ -24,15 +32,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ElevatedButton(
           onPressed: () => print("Settings button pressed"),
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.purpleAccent,
+            backgroundColor: ThemeCustom.colorPrimaryV2,
             minimumSize: const Size(15, 15),
             padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
           ),
-          child: const Padding(
+          child: Padding(
             padding: EdgeInsets.all(7),
             child: Icon(
               Icons.settings,
-              color: Colors.white,
+              color: ThemeCustom.colorWhite.withOpacity(0.9),
             ),
           ),
         ),
@@ -41,7 +49,5 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(bottom != null
-      ? 60 + bottom!.preferredSize.height
-      : 60); // Altura del AppBar
+  Size get preferredSize => const Size.fromHeight(130); // Altura del AppBar
 }

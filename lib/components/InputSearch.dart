@@ -34,7 +34,6 @@ class InputSearchState extends State<InputSearch> {
     _subscription = BlocProvider.of<SearchActive>(context)
         .stream
         .listen((activeSearchState) {
-      print(activeSearchState);
       if (!activeSearchState) {
         clearInputSearch();
       } else {

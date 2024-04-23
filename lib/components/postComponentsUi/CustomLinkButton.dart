@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hesperidas/services/BodyRouteService/RoutesBodyService.dart';
 import 'package:hesperidas/services/NavigationRouteService.dart';
+import 'package:hesperidas/utils/ThemeCustom.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CustomLinkButton extends StatelessWidget {
@@ -26,7 +27,7 @@ class CustomLinkButton extends StatelessWidget {
       margin: margin, // Usa el margen que se pasa como parámetro
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          foregroundColor: Colors.white, backgroundColor: Colors.teal, // Color del texto del botón
+          foregroundColor: Colors.white, backgroundColor: ThemeCustom.colorSecondary, // Color del texto del botón
           textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold), // Tamaño del texto
           padding: const EdgeInsets.symmetric(vertical: 16.0), // Padding vertical
           elevation: 2,
